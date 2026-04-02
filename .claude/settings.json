@@ -58,7 +58,9 @@
       "Read(./.env.*)",
       "Read(./secrets/**)",
       "Bash(rm -rf *)",
-      "Bash(curl *)"
+      "Read(**/*credential*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
     ]
   },
   "primaryApiKey": "self",
