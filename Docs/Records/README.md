@@ -37,6 +37,7 @@ Docs/Records/
 |------|------|-----|---------|---------|
 | 设置模块 | `settings/` | ✅ | ⏳ | ⏳ |
 | Hello World | `hello-world/` | - | - | ✅ |
+| Hello World 示例 | `helloworld/` | - | - | ✅ |
 
 ---
 

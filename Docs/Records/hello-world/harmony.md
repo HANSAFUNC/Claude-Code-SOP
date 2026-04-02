@@ -4,7 +4,7 @@
 
 ```
 entry/src/main/ets/pages/hello/
-└── Index.ets    # @Entry 页面组件
+└── Index.ets          # @Entry 页面组件
 ```
 
 ## 核心代码
@@ -32,7 +32,7 @@ struct HelloPage {
 
 ## 技术决策
 
-1. **声明式 UI** - 使用 `@Component` + `build()` 方法，官方推荐写法
+1. **声明式 UI** - 使用 `@Entry` + `@Component` + `build()` 方法，官方推荐写法
 2. **Column 布局** - 垂直居中布局
 3. **独立页面** - 不影响现有应用功能
 
