@@ -33,11 +33,10 @@ Docs/Records/
 
 ## 📂 现有模块记录
 
-| 模块 | 目录 | iOS | Android | Harmony |
-|------|------|-----|---------|---------|
-| 设置模块 | `settings/` | ✅ | ⏳ | ⏳ |
-| Hello World | `hello-world/` | - | - | ✅ |
-| Hello World 示例 | `helloworld/` | - | - | ✅ |
+| 模块 | 目录 | iOS | Android | Harmony | 状态 |
+|------|------|-----|---------|---------|------|
+| 设置模块 | `settings/` | ✅ | ⏳ | ⏳ | 开发中 |
+| Hello World | `hello-world/` | - | - | ✅ | 已完成 |
 
 ---
 

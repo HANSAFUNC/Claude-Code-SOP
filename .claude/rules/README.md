@@ -4,15 +4,14 @@
 
 ## 当前规则
 
-- **代码审查**: 所有代码必须经过平台专家初审 + 架构师复审
-- **测试覆盖率**: 最低 80%
-- **Commit 格式**: Conventional Commits
-- **头脑风暴**: 每个新功能必须进行头脑风暴
+| 规则 | 说明 | 文件 |
+|------|------|------|
+| **团队检查** | 开发新功能前必须检查并创建 Agent Team | [team-check.md](./team-check.md) |
+| **代码审查** | 所有代码必须经过平台专家初审 + 架构师复审 | - |
+| **测试覆盖率** | 最低 80% | - |
+| **Commit 格式** | Conventional Commits | - |
+| **头脑风暴** | 每个新功能必须进行头脑风暴 | - |
 
 ## 规则文件
 
-规则文件应按功能模块划分，例如：
-
-- `coding-standards.md` - 代码规范
-- `testing-requirements.md` - 测试要求
-- `review-process.md` - 审查流程
+- `team-check.md` - Agent Team 检查规则

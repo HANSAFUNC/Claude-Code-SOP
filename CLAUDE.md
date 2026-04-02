@@ -1,52 +1,20 @@
 # CLAUDE.md - 项目配置与开发规范索引
 
-> 本项目使用 Superpowers 插件 + Agent Team 驱动开发流程，所有新功能开发必须启动 Agent Team 协作。
+> 本项目使用 Superpowers 插件驱动开发流程，所有新功能开发必须调用 Superpowers 技能。
 
 ---
 
 ## 🚀 核心指令
 
-### Agent Team 模式（强制）
+### 新功能开发
 
-**每次开发新功能时，必须启动 Agent Team 团队协作模式：**
-
-```bash
-# 1. 创建团队
-/teams create {module-name}-team
-
-# 2. 创建团队成员（按角色）- 使用 Agent 工具
-- Architect（架构师）- 负责架构设计和评审
-- Harmony 专家 - 负责 HarmonyOS 平台实现
-- iOS 专家 - 负责 iOS 平台实现（如适用）
-- Android 专家 - 负责 Android 平台实现（如适用）
-- QA 工程师 - 负责测试验证和覆盖率
-- Code Reviewer - 负责代码审查
-```
-
-**重要**：
-- 必须使用 `Agent` 工具创建团队成员，指定 `team_name` 和 `prompt` 参数
-- 团队创建后，由 Team Lead 协调以下流程
-- 不创建团队直接开发 = 违反流程
-
-**团队工作流程**：
-
-1. **需求分析** - 全员参与
-2. **架构设计** - Architect 主导
-3. **任务分配** - Team Lead 使用 `SendMessage` 工具分派给各角色
-4. **并行开发** - 各平台专家独立开发
-5. **测试验证** - QA 工程师负责
-6. **代码审查** - Code Reviewer 负责
-7. **合并发布** - Team Lead 负责
-
-### Superpowers 技能
-
-配合 Agent Team 使用，所有开发流程必须调用 Superpowers：
+**每次开发新功能时，必须调用 Superpowers：**
 
 ```bash
 /superpowers
 ```
 
-Superpowers 将协调：需求分析 → 架构设计 → 测试先行 → 并行实现 → 验证审查
+Superpowers 将自动协调完整开发流程：需求分析 → 架构设计 → 测试先行 → 并行实现 → 验证审查
 
 ---
 
