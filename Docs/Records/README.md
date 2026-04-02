@@ -36,7 +36,7 @@ Docs/Records/
 | 模块 | 目录 | iOS | Android | Harmony |
 |------|------|-----|---------|---------|
 | 设置模块 | `settings/` | ✅ | ⏳ | ⏳ |
-| Hello World | `helloworld/` | - | - | ✅ |
+| Hello World | `hello-world/` | - | - | ✅ |
 
 ---
 
