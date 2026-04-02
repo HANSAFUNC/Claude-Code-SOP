@@ -10,20 +10,43 @@
 # Registered via plugin hooks/hooks.json (auto-loaded when plugin is enabled).
 # Can also be registered manually in ~/.claude/settings.json.
 
-set -e
+# NOTE: Do NOT use 'set -e' - hooks must handle all errors gracefully
+# and always exit 0 to avoid blocking tool execution.
 
 # Hook phase from CLI argument: "pre" (PreToolUse) or "post" (PostToolUse)
 HOOK_PHASE="${1:-post}"
 
 # ─────────────────────────────────────────────
-# Read stdin first (before project detection)
+# Configuration variables
+# ─────────────────────────────────────────────
+
+CONFIG_DIR="${HOME}/.claude/homunculus"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SKILL_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# ─────────────────────────────────────────────
+# Read stdin first
 # ─────────────────────────────────────────────
 
 # Read JSON from stdin (Claude Code hook format)
-INPUT_JSON=$(cat)
+INPUT_JSON=$(cat) || exit 0
 
 # Exit if no input
 if [ -z "$INPUT_JSON" ]; then
+  exit 0
+fi
+
+# ─────────────────────────────────────────────
+# Early exit checks (minimal processing)
+# ─────────────────────────────────────────────
+
+# Skip if globally disabled
+if [ -f "$CONFIG_DIR/disabled" ]; then
+  exit 0
+fi
+
+# Skip if disabled via CLV2_CONFIG
+if [ -n "${CLV2_CONFIG:-}" ] && [ -f "$(dirname "$CLV2_CONFIG")/disabled" ]; then
   exit 0
 fi
 
@@ -49,6 +72,37 @@ resolve_python_cmd() {
 PYTHON_CMD="$(resolve_python_cmd 2>/dev/null || true)"
 if [ -z "$PYTHON_CMD" ]; then
   echo "[observe] No python interpreter found, skipping observation" >&2
+  exit 0
+fi
+
+# ─────────────────────────────────────────────
+# Early exit if observer is disabled (config check)
+# ─────────────────────────────────────────────
+# Check config.json observer.enabled before any heavy processing
+
+OBSERVER_ENABLED=false
+CONFIG_FILE="${SKILL_ROOT:-}/config.json"
+if [ -n "${CLV2_CONFIG:-}" ]; then
+  CONFIG_FILE="$CLV2_CONFIG"
+fi
+
+if [ -f "$CONFIG_FILE" ]; then
+  _enabled=$("$PYTHON_CMD" -c "
+import json, os
+try:
+    with open(os.environ.get('CLV2_CONFIG', '$CONFIG_FILE')) as f:
+        cfg = json.load(f)
+    print(str(cfg.get('observer', {}).get('enabled', False)).lower())
+except Exception:
+    print('false')
+" 2>/dev/null || echo "false")
+  if [ "$_enabled" = "true" ]; then
+    OBSERVER_ENABLED=true
+  fi
+fi
+
+# Exit early if observer is disabled - no need to continue
+if [ "$OBSERVER_ENABLED" != "true" ]; then
   exit 0
 fi
 
@@ -81,15 +135,7 @@ fi
 # Sourcing detect-project.sh creates project-scoped directories and updates
 # projects.json, so automated sessions must return before that point.
 
-CONFIG_DIR="${HOME}/.claude/homunculus"
-
-# Skip if disabled (check both default and CLV2_CONFIG-derived locations)
-if [ -f "$CONFIG_DIR/disabled" ]; then
-  exit 0
-fi
-if [ -n "${CLV2_CONFIG:-}" ] && [ -f "$(dirname "$CLV2_CONFIG")/disabled" ]; then
-  exit 0
-fi
+# NOTE: CONFIG_DIR disabled check already done at line 52-56 above
 
 # Prevent observe.sh from firing on non-human sessions to avoid:
 #   - ECC observing its own Haiku observer sessions (self-loop)
@@ -112,7 +158,8 @@ esac
 [ "${ECC_SKIP_OBSERVE:-0}" = "1" ] && exit 0
 
 # Layer 4: subagent sessions are automated by definition.
-_ECC_AGENT_ID=$(echo "$INPUT_JSON" | "$PYTHON_CMD" -c "import json,sys; print(json.load(sys.stdin).get('agent_id',''))" 2>/dev/null || true)
+# Use pure bash JSON parsing to avoid Python dependency for simple field extraction
+_ECC_AGENT_ID=$(echo "$INPUT_JSON" | grep -o '"agent_id"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"agent_id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/' 2>/dev/null || true)
 [ -n "$_ECC_AGENT_ID" ] && exit 0
 
 # Layer 5: known observer-session path exclusions.
@@ -130,9 +177,6 @@ fi
 # ─────────────────────────────────────────────
 # Project detection
 # ─────────────────────────────────────────────
-
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SKILL_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # Source shared project detection helper
 # This sets: PROJECT_ID, PROJECT_NAME, PROJECT_ROOT, PROJECT_DIR
