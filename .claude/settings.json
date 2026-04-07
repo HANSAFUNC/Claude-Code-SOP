@@ -6,21 +6,28 @@
   },
   "hasCompletedOnboarding": true,
   "hooks": {
-      "PreToolUse": [{
-            "matcher": "*",
-            "hooks": [{
-              "type": "command",
-              "command": ".claude/skills/continuous-learning-v2/hooks/observe.sh"
-            }]
-          }],
-          "PostToolUse": [{
-            "matcher": "*",
-            "hooks": [{
-              "type": "command",
-              "command": ".claude/skills/continuous-learning-v2/hooks/observe.sh"
-            }]
-          }]
-
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/skills/continuous-learning-v2/hooks/observe.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/skills/continuous-learning-v2/hooks/observe.sh"
+          }
+        ]
+      }
+    ]
   },
   "includeCoAuthoredBy": false,
   "permissions": {
@@ -40,7 +47,11 @@
       "Search"
     ],
     "ask": [
-      "Bash(git push --force *)"
+      "Bash(git push --force *)",
+      "Bash(npm install *)",
+      "Bash(pip install *)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)"
     ],
     "deny": [
       "Read(./.env)",
@@ -50,7 +61,11 @@
       "Read(**/*credential*)",
       "Read(**/*.pem)",
       "Read(**/*.key)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git rebase -i *)",
+      "Bash(kill *)",
+      "Bash(pkill *)",
+      "Bash(systemctl *)"
     ]
   },
   "primaryApiKey": "self",
