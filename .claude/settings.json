@@ -30,7 +30,6 @@
       "Bash(npm run build)",
       "Bash(npm run typecheck)",
       "Bash(git commit *)",
-      "Bash(git push *)",
       "Bash(ls *)",
       "Bash(grep -*)",
       "Bash",
@@ -50,7 +49,8 @@
       "Bash(rm -rf *)",
       "Read(**/*credential*)",
       "Read(**/*.pem)",
-      "Read(**/*.key)"
+      "Read(**/*.key)",
+      "Bash(git push *)"
     ]
   },
   "primaryApiKey": "self",
