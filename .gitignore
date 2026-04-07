@@ -20,13 +20,14 @@
 .claude/*
 !.claude/agents/
 !.claude/rules/
+!.claude/skills/
 !.claude/teams/
 !.claude/CLAUDE.md
 !.claude/settings.json
 !.claude/keybindings.json
 
 # .claude 下忽略的目录
-.claude/skills/
+
 .claude/backups/
 .claude/cache/
 .claude/debug/
