@@ -1,6 +1,6 @@
 # 开发流程
 
-**版本:** 3.0
+**版本:** 3.1
 **日期:** 2026-04-14
 **来源:** Superpowers Pipeline v6.1
 
@@ -91,13 +91,92 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 2.4 输出
+### 2.4 各步骤角色分工
+
+#### Step 1: 探索项目上下文
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 阅读 PRD/Design 文件，理解业务需求 | 需求理解文档 |
+| **Architect** | 查看最近 git log，了解技术现状 | 技术背景分析 |
+| **Architect** | 检查现有架构文档 Architect/*.md | 架构依赖分析 |
+| **Platform Spec** | 查看现有代码实现，了解平台差异 | 平台现状报告 |
+| **QA** | 查看现有测试覆盖率，了解测试现状 | 测试现状报告 |
+
+#### Step 2: 提供 UI/UX 视觉辅助
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 展示 Design 设计稿截图或 mockup | UI 参考图 |
+| **Architect** | 说明 UI 组件层级和交互流程 | UI 流程图 |
+| **Platform Spec** | 提出平台特定 UI 规范建议 | 平台 UI 建议 |
+
+#### Step 3: 逐一提出澄清问题
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 提出技术可行性问题 | 技术问题清单 |
+| **Architect** | 提出架构扩展性问题 | 架构问题清单 |
+| **Platform Spec** | 提出平台兼容性问题 | 平台问题清单 |
+| **QA** | 提出测试覆盖边界问题 | 测试问题清单 |
+
+**人工回答规范:**
+```text
+正确: 一次性提供完整信息 + 具体场景
+错误: TBD (违反 No Placeholders)
+```
+
+#### Step 4: 提出 2-3 个方案
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 设计 2-3 个技术方案 | 方案对比表 |
+| **Architect** | 分析各方案优劣和取舍 | 方案分析文档 |
+| **Platform Spec** | 补充平台实现差异说明 | 平台差异备注 |
+| **QA** | 补充测试难度评估 | 测试难度评级 |
+
+#### Step 5: 分段呈现设计内容
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 分段展示设计规格内容 | 设计段落 |
+| **Architect** | 等待人工确认或修改 | 确认记录 |
+| **Platform Spec** | 提出平台实现细节补充 | 平台补充内容 |
+| **QA** | 提出测试策略补充 | 测试补充内容 |
+
+#### Step 6: 写设计文档
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 撰写设计规格文档 | specs/*.md |
+| **Architect** | 定义数据模型和 API | Models/API 定义 |
+| **Platform Spec** | 补充平台特定实现说明 | 平台说明章节 |
+| **QA** | 补充测试策略章节 | 测试策略章节 |
+
+#### Step 7: Self-Review
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 检查完整性 (无 TBD) | 完整性检查报告 |
+| **Architect** | 检查一致性 (无矛盾) | 一致性检查报告 |
+| **Architect** | 检查 YAGNI (无过度设计) | YAGNI 检查报告 |
+| **Platform Spec** | 检查平台可行性 | 平台可行性报告 |
+| **QA** | 检查测试可覆盖性 | 测试覆盖性报告 |
+
+#### Step 8: 输出设计规格文档
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 最终文档输出并签字批准 | 批准签字 |
+| **全员** | 确认文档内容无异议 | 确认记录 |
+
+### 2.5 输出
 
 ```
 docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md
 ```
 
-### 2.5 HARD-GATE 1
+### 2.6 HARD-GATE 1
 
 ```
 ⚠️ HARD-GATE: 禁止在未批准设计前实施
@@ -106,18 +185,19 @@ docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md
 禁止调用 /writing-plans 命令
 ```
 
-### 2.6 Checklist
+### 2.7 Checklist
 
 ```text
 Phase 1 Checklist:
 ─────────────────────────────────────────
-☐ 探索项目上下文
-☐ 提供 UI/UX 视觉辅助
-☐ 逐一提出澄清问题
-☐ 提出 2-3 个方案
-☐ 分段呈现设计
-☐ 写设计文档
-☐ 规格审查循环
+☐ 探索项目上下文 (Architect + Platform Spec + QA)
+☐ 提供 UI/UX 视觉辅助 (Architect)
+☐ 逐一提出澄清问题 (全员)
+☐ 提出 2-3 个方案 (Architect + Platform Spec + QA)
+☐ 分段呈现设计 (Architect)
+☐ 写设计文档 (Architect)
+☐ 规格审查循环 (全员)
+☐ HARD-GATE 1 签字 (Architect)
 ```
 
 ---
@@ -167,14 +247,79 @@ Phase 1 Checklist:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 3.4 输入/输出
+### 3.4 各步骤角色分工
+
+#### Step 1: 加载已批准设计规格
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 加载 specs/*.md 文档 | 设计规格加载 |
+| **Architect** | 向全员介绍设计重点 | 设计要点说明 |
+| **Platform Spec** | 确认平台实现范围 | 平台范围确认 |
+| **QA** | 确认测试范围 | 测试范围确认 |
+
+#### Step 2: 文件结构映射
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 规划整体文件结构 | 文件结构列表 |
+| **Architect** | 定义新增/修改文件 | 文件变更清单 |
+| **iOS-Spec** | 规划 iOS 文件结构 | iOS 文件列表 |
+| **Android-Spec** | 规划 Android 文件结构 | Android 文件列表 |
+| **Harmony-Spec** | 规划 Harmony 文件结构 | Harmony 文件列表 |
+| **QA** | 规划测试文件结构 | 测试文件列表 |
+
+#### Step 3: 任务分解
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 分解整体任务为 2-5 分钟粒度 | 任务清单 |
+| **Architect** | 定义任务依赖关系 | 依赖图 |
+| **iOS-Spec** | 分解 iOS 平台任务 | iOS 任务列表 |
+| **Android-Spec** | 分解 Android 平台任务 | Android 任务列表 |
+| **Harmony-Spec** | 分解 Harmony 平台任务 | Harmony 任务列表 |
+| **QA** | 分解测试编写任务 | 测试任务列表 |
+
+#### Step 4: RED-GREEN-REFACTOR 定义
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 定义 TDD 循环步骤 | TDD 步骤定义 |
+| **Platform Spec** | 定义平台特定测试策略 | 平台测试策略 |
+| **QA** | 定义测试验收标准 | 测试验收标准 |
+
+#### Step 5: No Placeholders 检查
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 自动检查 TBD/模糊描述 | 检查结果 |
+| **Architect** | 人工确认无占位符 | 确认记录 |
+| **全员** | 确认任务描述明确可执行 | 确认记录 |
+
+#### Step 6: Self-Review
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 检查可构建性 | 可构建性报告 |
+| **Architect** | 检查规格对齐 | 规格对齐报告 |
+| **Platform Spec** | 检查任务粒度合理性 | 粒度检查报告 |
+| **QA** | 检查测试覆盖完整性 | 测试覆盖报告 |
+
+#### Step 7: 输出实施计划文档
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 最终计划文档输出并签字批准 | 批准签字 |
+| **全员** | 确认计划可执行无异议 | 确认记录 |
+
+### 3.5 输入/输出
 
 ```text
 输入: docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md (已批准)
 输出: docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md
 ```
 
-### 3.5 HARD-GATE 2
+### 3.6 HARD-GATE 2
 
 ```
 ⚠️ HARD-GATE: 计划必须可构建
@@ -183,7 +328,7 @@ Phase 1 Checklist:
 禁止调用 /subagent-driven-development 命令
 ```
 
-### 3.6 No Placeholders 规则
+### 3.7 No Placeholders 规则
 
 ```text
 计划失败条件 (必须重新规划):
@@ -194,17 +339,19 @@ Phase 1 Checklist:
 ❌ 占位符 ("// ... existing code ...")
 ```
 
-### 3.7 Checklist
+### 3.8 Checklist
 
 ```text
 Phase 2 Checklist:
 ─────────────────────────────────────────
-☐ 文件结构映射
-☐ 任务粒度 2-5 分钟
-☐ RED-GREEN-REFACTOR 循环
-☐ No Placeholders 检查
-☐ 可构建性验证
-☐ 规格对齐验证
+☐ 加载设计规格 (Architect)
+☐ 文件结构映射 (Architect + Platform Spec + QA)
+☐ 任务分解 2-5 分钟 (各角色分工)
+☐ RED-GREEN-REFACTOR 定义 (Architect + QA)
+☐ No Placeholders 检查 (Architect)
+☐ 可构建性验证 (Architect + Platform Spec)
+☐ 规格对齐验证 (Architect)
+☐ HARD-GATE 2 签字 (Architect)
 ```
 
 ---
@@ -249,8 +396,8 @@ Phase 2 Checklist:
 │  ┌────┴────┬────────────┬────────────┐                                     │
 │  │         │            │            │                                      │
 │  ↓         ↓            ↓            ↓                                      │
-│  /tdd      /tdd         /tdd         /tdd                                   │
-│  Task 1    Task 2       Task 3       Task N                                 │
+│  iOS-Spec  Android-Spec Harmony-Spec QA                                     │
+│  执行任务   执行任务       执行任务     编写测试                                │
 │  RED-GREEN-REFACTOR                                                     │
 │       ↓                                                                     │
 │  Step 3: (如遇问题) /debug                                                   │
@@ -259,17 +406,87 @@ Phase 2 Checklist:
 │  Step 4: /verify 完成前验证                                                  │
 │       ↓                                                                     │
 │  Step 5: ExitWorktree                                                       │
+│       ↓                                                                     │
+│  Step 6: 双阶段审查                                                          │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.3 输入
+### 4.4 各步骤角色分工
 
-```
-docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md (已批准)
-```
+#### Step 1: Git Worktree 隔离
 
-### 4.4 HARD-GATE 3
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 创建 Worktree 隔离环境 | Worktree 目录 |
+| **Architect** | 分配任务给各平台专家 | 任务分配表 |
+| **iOS-Spec** | 进入 iOS worktree 目录 | iOS 工作环境 |
+| **Android-Spec** | 进入 Android worktree 目录 | Android 工作环境 |
+| **Harmony-Spec** | 进入 Harmony worktree 目录 | Harmony 工作环境 |
+
+#### Step 2: /subagent-driven-development 执行
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 监控任务执行进度 | 进度监控报告 |
+| **Architect** | 协调跨平台依赖 | 协调记录 |
+| **iOS-Spec** | 执行 iOS 任务: Models → ViewModel → View | iOS 代码 |
+| **Android-Spec** | 执行 Android 任务: Models → ViewModel → View | Android 代码 |
+| **Harmony-Spec** | 执行 Harmony 任务: Models → ViewModel → View | Harmony 代码 |
+| **QA** | 执行测试任务: 编写测试用例 | 测试代码 |
+
+#### Step 3: RED-GREEN-REFACTOR 循环 (每个任务)
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Platform Spec** | [RED] 写测试文件，运行确认失败 | 测试文件 |
+| **Platform Spec** | [GREEN] 写实现代码，运行确认通过 | 实现代码 |
+| **Platform Spec** | [REFACTOR] 优化代码质量 | 优化代码 |
+| **QA** | 验证测试覆盖率和质量 | 覆盖率报告 |
+| **Platform Spec** | [COMMIT] git commit 提交代码 | 提交记录 |
+
+#### Step 4: /debug 调试 (如遇问题)
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Platform Spec** | 描述问题现象 | 问题描述 |
+| **Platform Spec** | 查看错误日志和堆栈 | 错误日志 |
+| **Architect** | 协助分析根因 | 根因分析 |
+| **Platform Spec** | 制定修复方案并实施 | 修复代码 |
+| **QA** | 验证修复后测试通过 | 验证报告 |
+
+#### Step 5: /verify 完成前验证
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **QA** | 运行所有测试 | 测试报告 |
+| **QA** | 检查覆盖率 ≥80% | 覆盖率报告 |
+| **Platform Spec** | 启动应用手动测试 | 手测报告 |
+| **Platform Spec** | 确认无编译错误/警告 | 编译报告 |
+| **Architect** | 确认所有任务已完成 | 完成确认 |
+
+#### Step 6: 双阶段审查
+
+**Stage 1: Spec Compliance (Architect 主导)**
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **Architect** | 对照设计规格检查需求满足 | Spec 检查报告 |
+| **Architect** | 检查数据模型一致性 | 数据模型报告 |
+| **Architect** | 检查 API 接口一致性 | API 检查报告 |
+| **Architect** | 检查 UI/UX 实现一致性 | UI 检查报告 |
+
+**Stage 2: Code Quality (QA + Architect)**
+
+| 角色 | 操作 | 产出 |
+|------|------|------|
+| **QA** | 检查代码规范 | 代码规范报告 |
+| **QA** | 验证测试覆盖率 | 覆盖率报告 |
+| **Architect** | 检查安全漏洞 | 安全检查报告 |
+| **QA** | 检查性能无回归 | 性能报告 |
+| **Architect** | 最终批准签字 | 批准签字 |
+
+### 4.5 HARD-GATE 3
 
 ```
 ⚠️ HARD-GATE: 规格合规 + 代码质量
@@ -278,106 +495,56 @@ docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md (已批准)
 禁止调用 git merge / git push
 ```
 
-### 4.5 Checklist
+### 4.6 Checklist
 
 ```text
 Phase 3 Checklist:
 ─────────────────────────────────────────
-☐ Git Worktree 隔离
-☐ Subagent 分发执行
-☐ /tdd RED-GREEN-REFACTOR
-☐ (如遇问题) /debug
-☐ /verify 完成验证
-☐ Spec Compliance 检查
-☐ Code Quality 检查
+☐ Git Worktree 隔离 (Architect)
+☐ 任务分配 (Architect → Platform Spec + QA)
+☐ /tdd RED-GREEN-REFACTOR (Platform Spec)
+☐ (如遇问题) /debug (Platform Spec + Architect)
+☐ /verify 完成验证 (QA + Platform Spec + Architect)
+☐ Spec Compliance 检查 (Architect)
+☐ Code Quality 检查 (QA + Architect)
+☐ HARD-GATE 3 签字 (Architect + QA)
+☐ 合并发布 (Architect)
 ```
 
 ---
 
-## 5. 命令速查表
+## 5. 合并发布
 
-### 5.1 各阶段命令
+### 5.1 各角色操作
 
-| 阶段 | 命令 | 说明 |
+| 角色 | 操作 | 产出 |
 |------|------|------|
-| **Phase 1** | `/superpowers` | 主入口 |
-| | `/brainstorming` | 设计 skill |
-| **Phase 2** | `/writing-plans` | 规划 skill |
-| **Phase 3** | `/subagent-driven-development` | SDD 执行 |
-| | `/tdd` | TDD 循环 |
-| | `/debug` | 系统化调试 |
-| | `/verify` | 完成验证 |
-
-### 5.2 完整限定名
-
-```text
-/superpowers:brainstorm
-/superpowers:writing-plans
-/superpowers:subagent-driven-development
-/superpowers:test-driven-development
-/superpowers:systematic-debugging
-/superpowers:verification-before-completion
-```
-
-### 5.3 命令触发关键词
-
-| Skill | 触发关键词 |
-|-------|-----------|
-| **brainstorming** | "设计", "规划", "新功能", "创建" |
-| **writing-plans** | "计划", "实施方案", "任务分解" |
-| **subagent-driven-development** | "执行", "实施", "开始编码" |
-| **test-driven-development** | "实现", "编码", "写代码" |
-| **systematic-debugging** | "调试", "debug", "问题", "bug" |
-| **verification-before-completion** | "完成", "验证", "确认" |
+| **Architect** | git checkout main + merge | 合并记录 |
+| **Architect** | git push + 创建 tag | 发布记录 |
+| **Architect** | 更新 CHANGELOG.md | Changelog |
+| **Platform Spec** | 更新模块记录 overview.md | 模块记录 |
+| **QA** | 更新测试报告归档 | 测试归档 |
 
 ---
 
-## 6. 合并发布
+## 6. 命令速查表
 
-### 6.1 HARD-GATE 3 通过后
-
-```text
-Step 1: git checkout main
-Step 2: git merge feature-xxx --no-ff
-Step 3: git push origin main
-Step 4: git tag -a v1.x.0 -m "Release message"
-Step 5: git push origin v1.x.0
-```
-
-### 6.2 更新记录
-
-```text
-更新 Docs/Records/{module}/overview.md
-更新 Docs/Records/{module}/harmony.md (或 ios.md/android.md)
-更新 Docs/Records/README.md 索引
-```
+| 阶段 | 命令 | 主导角色 |
+|------|------|----------|
+| **Phase 1** | `/superpowers`, `/brainstorming` | Architect |
+| **Phase 2** | `/writing-plans` | Architect |
+| **Phase 3** | `/subagent-driven-development` | Platform Spec |
+| | `/tdd` | Platform Spec |
+| | `/debug` | Platform Spec |
+| | `/verify` | QA + Architect |
 
 ---
 
-## 7. 异常处理
-
-### 7.1 HARD-GATE 未通过
-
-```text
-处理流程:
-─────────────────────────────────────────
-门禁失败 → 阅读驳回原因 → 修复问题 → 重新提交审查 → 通过后继续
-```
-
-### 7.2 任务执行失败
-
-```text
-处理流程:
-─────────────────────────────────────────
-任务失败 → /debug 调试修复 → 或 ExitWorktree 丢弃重来 → 继续执行
-```
-
----
-
-## 8. 相关文档
+## 7. 相关文档
 
 | 文档 | 路径 | 说明 |
 |------|------|------|
+| 团队角色 | [01-roles.md](./01-roles.md) | 角色职责定义 |
 | 门禁详细定义 | [03-gates.md](./03-gates.md) | HARD-GATE 检查清单 |
 | 开发规范 | [04-standards.md](./04-standards.md) | 测试 + Commit 规范 |
 | Worktree 规范 | [05-worktree.md](./05-worktree.md) | 隔离环境使用 |
@@ -385,7 +552,7 @@ Step 5: git push origin v1.x.0
 
 ---
 
-**版本**: 3.0
+**版本**: 3.1
 **更新日期**: 2026-04-14
 **适用范围**: 跨平台移动开发团队
 **来源**: Superpowers Pipeline v6.1
