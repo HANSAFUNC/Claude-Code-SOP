@@ -15,6 +15,7 @@
 | [05-commit.md](./05-commit.md) | Commit 规范 | v1.0 |
 | [06-gates.md](./06-gates.md) | 质量门禁定义 (硬门禁) | **v2.0** |
 | [07-worktree.md](./07-worktree.md) | Git Worktree 使用规范 | **v1.0 新增** |
+| [08-manual-operations.md](./08-manual-operations.md) | 人工操作步骤指南 | **v1.0 新增** |
 | [version-history.md](./version-history.md) | 版本迭代记录 | **v1.0 新增** |
 
 ---
