@@ -1,6 +1,7 @@
-# CLAUDE.md - 项目配置与开发规范索引
+# CLAUDE.md - 项目开发规范模板
 
-> 本项目使用 Superpowers Pipeline v6.1 驱动开发流程，强制执行三阶段硬门禁。
+> 使用 Superpowers Pipeline v6.1 驱动开发流程，强制执行三阶段硬门禁。
+> **此模板可移植到任何项目，项目接入时请根据现有代码风格进行调整。**
 
 ---
 
@@ -20,58 +21,66 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 
 ## 📚 文档索引
 
-### 产品需求
+### 产品需求 (项目接入时创建)
 
-| 文档 | 路径 |
-|------|------|
-| PRD 目录 | `PRD/README.md` |
-| 设计稿目录 | `Design/README.md` |
+| 文档 | 路径 | 说明 |
+|------|------|------|
+| PRD 目录 | `PRD/README.md` | 产品需求文档 |
+| 设计稿目录 | `Design/README.md` | UI 设计稿 |
 
-### 架构设计
+### 架构设计 (项目接入时创建)
 
-| 文档 | 路径 |
-|------|------|
-| 架构设计 | `Architect/ArchitectureDesign.md` |
-| API 设计 | `Architect/APIDesign.md` |
+| 文档 | 路径 | 说明 |
+|------|------|------|
+| 架构设计 | `Architect/ArchitectureDesign.md` | 整体架构设计 |
+| API 设计 | `Architect/APIDesign.md` | API 接口设计 |
 
-### Superpowers Pipeline (新增)
+> **注意:** 架构设计文档需在 Phase 0 规范探索阶段从现有代码提取并创建。
 
-| 文档 | 路径 |
-|------|------|
-| 设计规格目录 | `docs/superpowers/specs/README.md` |
-| 设计规格文档 | `docs/superpowers/specs/YYYY-MM-DD-*-design.md` |
-| 实施计划目录 | `docs/superpowers/plans/README.md` |
-| 实施计划文档 | `docs/superpowers/plans/YYYY-MM-DD-*.md` |
-| 审查报告目录 | `docs/superpowers/reviews/README.md` |
-| 审查报告文档 | `docs/superpowers/reviews/YYYY-MM-DD-*-review.md` |
+### Superpowers Pipeline
+
+| 文档 | 路径 | 说明 |
+|------|------|------|
+| 设计规格目录 | `docs/superpowers/specs/README.md` | 设计规格模板 |
+| 设计规格文档 | `docs/superpowers/specs/YYYY-MM-DD-*-design.md` | 各功能设计规格 |
+| 实施计划目录 | `docs/superpowers/plans/README.md` | 实施计划模板 |
+| 实施计划文档 | `docs/superpowers/plans/YYYY-MM-DD-*.md` | 各功能实施计划 |
+| 审查报告目录 | `docs/superpowers/reviews/README.md` | 审查报告模板 |
+| 审查报告文档 | `docs/superpowers/reviews/YYYY-MM-DD-*-review.md` | 各功能审查报告 |
 
 ### 团队规范 (SOP)
 
-| 文档 | 路径 |
-|------|------|
-| SOP 总览 | `Docs/SOP/README.md` |
-| 团队角色 | `Docs/SOP/01-roles.md` |
-| 开发流程 (v3.5) | `Docs/SOP/02-flow.md` |
-| 质量门禁 + 审查 | `Docs/SOP/03-gates.md` |
-| 测试 + Commit 规范 | `Docs/SOP/04-standards.md` |
-| Git Worktree 规范 | `Docs/SOP/05-worktree.md` |
-| 人工操作指南 | `Docs/SOP/06-operations.md` |
-
-### 团队协作
-
-| 文档 | 路径 |
-|------|------|
-| 团队协作指南 | `Docs/Guides/team-collaboration.md` |
-
-### 模块记录
-
-| 文档 | 路径 |
-|------|------|
-| 记录总览 | `Docs/Records/README.md` |
+| 文档 | 路径 | 说明 |
+|------|------|------|
+| SOP 总览 | `Docs/SOP/README.md` | 流程总览 |
+| 团队角色 | `Docs/SOP/01-roles.md` | 角色职责定义 |
+| 开发流程 (v3.5) | `Docs/SOP/02-flow.md` | 三阶段流程 + 其他场景 |
+| 质量门禁 + 审查 | `Docs/SOP/03-gates.md` | HARD-GATE 定义 |
+| 测试 + Commit 规范 | `Docs/SOP/04-standards.md` | 开发规范 |
+| Git Worktree 规范 | `Docs/SOP/05-worktree.md` | 隔离环境使用 |
+| 人工操作指南 | `Docs/SOP/06-operations.md` | 详细操作步骤 |
 
 ---
 
-## 📋 开发流程 (v3.0)
+## 📋 开发流程 (v3.5)
+
+### 场景选择决策树
+
+```
+是否是新功能? ──── 是 → 完整三阶段流程 (Phase 1-3)
+    │
+    否
+    │
+是否是 Bug? ──── 是 → Bug 修复流程 (/debug + /verify)
+    │
+    否
+    │
+改动范围 >10%? ──── 是 → 改版流程 (Phase 1-3 简化版)
+    │
+    否
+    │
+小改动流程 (直接执行)
+```
 
 ### 三阶段硬门禁流程
 
@@ -81,30 +90,33 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  Phase 1: Design      HARD-GATE 1      Phase 2: Planning                   │
-│  (brainstorming)   ─────────────────→   (writing-plans)                    │
-│       ↓                  ↓                    ↓                            │
-│  设计规格文档      "禁止未批准实施"          实施计划文档                     │
-│       ↓                                       ↓                             │
-│  specs/YYYY-MM-DD-*.md                  HARD-GATE 2                         │
-│                                     "计划必须可构建"                         │
-│                                              ↓                              │
-│  Phase 3: Implement  ─────────────────→  HARD-GATE 3                        │
-│  (SDD)                  ↓             "规格合规 + 代码质量"                  │
-│       ↓             Git Worktree                                           │
-│  双阶段审查           隔离机制                                             │
-│       ↓                                                                     │
-│  reviews/YYYY-MM-DD-*-review.md                                             │
+│  /superpowers     ─────────────────→   /writing-plans                      │
+│       ↓            "禁止未批准实施"          实施计划文档                     │
+│  设计规格文档                              ↓                               │
+│                                        HARD-GATE 2                         │
+│                                    "计划必须可构建"                          │
+│                                             ↓                               │
+│  Phase 3: Implement  ─────────────→   HARD-GATE 3                          │
+│  /tdd /debug /verify     ↓             "规格合规 + 代码质量"                 │
+│       ↓             Git Worktree                                            │
+│  双阶段审查           隔离机制                                               │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 阶段详解
+### 旧项目接入流程 (Phase 0)
 
-| 阶段 | 输入 | 输出 | 门禁 | 核心要求 |
-|------|------|------|------|----------|
-| **Phase 1: Design** | PRD/Design | `specs/*.md` | HARD-GATE 1 | 无 TBD、交互式设计 |
-| **Phase 2: Planning** | 设计规格 | `plans/*.md` | HARD-GATE 2 | No Placeholders、2-5分钟任务 |
-| **Phase 3: Implementation** | 实施计划 | 代码 + 测试 | HARD-GATE 3 | SDD + Worktree 隔离 |
+```
+Phase 0: 规范探索      HARD-GATE 0'     后续开发
+    │                      ↓                  │
+    ↓                 人工确认签字             ↓
+分析现有代码  ─────────────────→   按确认规范继续
+提取约定
+定义兼容规范
+    │
+    ↓
+产出规范文档
+```
 
 ---
 
@@ -112,6 +124,7 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 
 | 门禁 | 阻塞条件 | 说明 |
 |------|----------|------|
+| **HARD-GATE 0'** | 规范必须人工确认 | 旧项目接入时，提取的规范需全员签字 |
 | **HARD-GATE 1** | 禁止未批准实施 | 设计未通过 = 禁止进入 Planning |
 | **HARD-GATE 2** | 计划必须可构建 | 计划未通过 = 禁止进入 Implementation |
 | **HARD-GATE 3** | 规格合规 + 代码质量 | 审查未通过 = 禁止合并 |
@@ -131,6 +144,20 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 ---
 
 ## ✅ 硬门禁检查清单
+
+### HARD-GATE 0': 规范确认 (旧项目接入)
+
+```text
+☐ 目录结构分析完成
+☐ 命名约定提取完成
+☐ 设计模式提取完成
+☐ 平台约定提取完成
+☐ API 风格定义完成
+☐ 数据模型风格定义完成
+☐ 兼容规范文档产出
+☐ 渐进迁移策略定义
+☐ 全员逐项确认签字
+```
 
 ### HARD-GATE 1: Design Approved
 
@@ -188,14 +215,14 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 
 | Type | 说明 | 示例 |
 |------|------|------|
-| `feat` | 新功能 | `feat(course): 添加课程列表页面` |
-| `fix` | Bug 修复 | `fix(auth): 修复登录 token 过期问题` |
-| `refactor` | 重构 | `refactor(utils): 抽取公共工具函数` |
-| `docs` | 文档更新 | `docs(README): 更新快速开始指南` |
-| `test` | 测试相关 | `test(user): 添加用户服务单元测试` |
-| `chore` | 构建/工具 | `chore(deps): 升级依赖版本` |
-| `perf` | 性能优化 | `perf(render): 优化列表渲染性能` |
-| `ci` | CI/CD | `ci(github): 添加自动化测试流程` |
+| `feat` | 新功能 | `feat: add course list page` |
+| `fix` | Bug 修复 | `fix: resolve login token issue` |
+| `refactor` | 重构 | `refactor: extract utility functions` |
+| `docs` | 文档更新 | `docs: update README` |
+| `test` | 测试相关 | `test: add unit tests` |
+| `chore` | 构建/工具 | `chore: update dependencies` |
+| `perf` | 性能优化 | `perf: improve rendering` |
+| `ci` | CI/CD | `ci: add GitHub Actions` |
 
 ---
 
@@ -210,91 +237,59 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 
 ---
 
-## 🔀 异常处理
-
-### HARD-GATE 未通过
-
-```text
-门禁失败 → 诊断问题 → 修复 → 重新提交审查 → 通过后继续
-```
-
-### 任务执行失败
-
-```text
-任务失败 → 在 Worktree 中诊断 → 修复 → 重新执行 → 继续
-```
-
----
-
 ## 📁 目录规范
 
 ```text
 项目根目录/
 ├── .claude/                    # Claude 配置
-│   ├── agents/                 # 项目专用 agents
-│   ├── rules/                  # 项目规则
-│   ├── teams/                  # 团队配置
+│   ├── agents/                 # 项目专用 agents (可选)
+│   ├── rules/                  # 项目规则 (可选)
+│   ├── teams/                  # 团队配置 (可选)
 │   └── CLAUDE.md               # 本文件
-├── docs/                       # 文档目录 (新增)
+├── docs/                       # 文档目录
 │   └── superpowers/            # Superpowers Pipeline 文档
-│       ├── specs/              # 设计规格
-│       │   ├── README.md       # 规格目录
-│       │   └── YYYY-MM-DD-*-design.md  # 规格文档
-│       ├── plans/              # 实施计划
-│       │   ├── README.md       # 计划目录
-│       │   └── YYYY-MM-DD-*.md # 计划文档
-│       └── reviews/            # 审查报告
-│       │   ├── README.md       # 审查目录
-│       │   └── YYYY-MM-DD-*-review.md  # 审查文档
-├── PRD/                        # 产品需求文档
-├── Design/                     # UI 设计稿
-├── Architect/                  # 架构设计文档
-├── Docs/                       # 团队规范文档
-│   ├── SOP/                    # 标准操作流程 (01-06)
-│   ├── Guides/                 # 团队指南
-│   └── Records/                # 模块变更记录
-└── [应用源码目录]               # 应用代码
+│       ├── specs/              # 设计规格 (Phase 1 产出)
+│       ├── plans/              # 实施计划 (Phase 2 产出)
+│       └── reviews/            # 审查报告 (Phase 3 产出)
+├── PRD/                        # 产品需求文档 (项目接入时创建)
+├── Design/                     # UI 设计稿 (项目接入时创建)
+├── Architect/                  # 架构设计文档 (Phase 0 产出)
+├── Docs/                       # 团队规范文档 (SOP 模板)
+│   ├── SOP/                    # 标准操作流程
+│   ├── Guides/                 # 团队指南 (可选)
+│   └── Records/                # 模块变更记录 (可选)
+└── [应用源码目录]               # 应用代码 (项目特定)
 ```
 
 ---
 
-## 📝 模块记录规范
+## 🔀 异常处理
 
-### 何时创建模块记录
+### HARD-GATE 未通过
 
-**每次开发新功能时**，必须创建或更新模块记录：
+```text
+门禁失败 → 阅读驳回原因 → 修复 → 重新提交审查 → 通过后继续
+```
 
-| 场景 | 操作 |
-|------|------|
-| 全新功能模块 | 创建 `Docs/Records/{module}/` 目录及所有文件 |
-| 现有模块变更 | 更新对应平台的记录文件 |
-| 跨平台同步 | 更新 `overview.md` 和各平台记录 |
+### 任务执行失败
 
-### 完成开发后检查
-
-- [ ] 代码已提交到 git
-- [ ] `Docs/Records/{module}/overview.md` 已创建/更新
-- [ ] 平台记录文件已更新
-- [ ] `Docs/Records/README.md` 索引已更新
-- [ ] 变更历史已登记 (Commit、PR)
+```text
+任务失败 → /debug 调试修复 → 或 ExitWorktree 丢弃重来 → 继续执行
+```
 
 ---
 
-## 🔄 流程对比
+## 🔄 渐进式规范化策略
 
-| 维度 | v1.0 (旧) | v2.0 (新) |
-|------|-----------|-----------|
-| 阶段数量 | 6 阶段 | 3 Phase |
-| 门禁类型 | 软门禁 | **硬门禁** |
-| 设计阶段 | 架构师输出 | **交互式 brainstorming** |
-| 规划阶段 | 无 | **强制 writing-plans** |
-| 任务粒度 | 模块级 | **2-5 分钟** |
-| 实施机制 | 并行开发 | **SDD + Worktree** |
-| 审查机制 | 双层审查 | **双阶段审查** |
+| 优先级 | 适用范围 | 要求 |
+|--------|----------|------|
+| **优先级 1** | 新代码 | ✅ 强制遵循新规范 |
+| **优先级 2** | 改版代码 | ⚠️ 逐步迁移到新规范 |
+| **优先级 3** | 旧代码 | 🔄 保持原风格，不强制重构 |
 
 ---
 
-**版本**: 3.0
+**版本**: 3.5
 **更新日期**: 2026-04-14
 **来源**: Superpowers Pipeline v6.1
-**说明**: 三阶段硬门禁流程 - 简化整合版 (6 文档)
+**说明**: 通用可移植模板 - 项目接入时根据现有代码风格调整
