@@ -51,15 +51,11 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 |------|------|
 | SOP 总览 | `Docs/SOP/README.md` |
 | 团队角色 | `Docs/SOP/01-roles.md` |
-| 开发流程 (v2.1) | `Docs/SOP/02-flow.md` |
-| 代码审查 | `Docs/SOP/03-review.md` |
-| 测试要求 | `Docs/SOP/04-testing.md` |
-| Commit 规范 | `Docs/SOP/05-commit.md` |
-| 质量门禁 (v2.0) | `Docs/SOP/06-gates.md` |
-| Git Worktree 规范 | `Docs/SOP/07-worktree.md` |
-| 人工操作步骤 | `Docs/SOP/08-manual-operations.md` |
-| Superpowers 命令参考 | `Docs/SOP/09-superpowers-commands.md` |
-| 版本迭代记录 | `Docs/SOP/version-history.md` |
+| 开发流程 (v3.0) | `Docs/SOP/02-flow.md` |
+| 质量门禁 + 审查 | `Docs/SOP/03-gates.md` |
+| 测试 + Commit 规范 | `Docs/SOP/04-standards.md` |
+| Git Worktree 规范 | `Docs/SOP/05-worktree.md` |
+| 人工操作指南 | `Docs/SOP/06-operations.md` |
 
 ### 团队协作
 
@@ -75,7 +71,7 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 
 ---
 
-## 📋 开发流程 (v2.1)
+## 📋 开发流程 (v3.0)
 
 ### 三阶段硬门禁流程
 
@@ -298,7 +294,7 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 
 ---
 
-**版本**: 2.3
+**版本**: 3.0
 **更新日期**: 2026-04-14
 **来源**: Superpowers Pipeline v6.1
-**说明**: 三阶段硬门禁流程 - 适用于跨平台移动项目 (含完整命令参考)
+**说明**: 三阶段硬门禁流程 - 简化整合版 (6 文档)
