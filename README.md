@@ -70,53 +70,68 @@ export ANTHROPIC_API_KEY=your_api_key
 
 ### 复制后的目录结构
 
+模板会复制到目标项目的 `sop-template/` 独立目录，与应用源码分离：
+
 ```
 <目标项目>/
-├── CLAUDE.md                     # 开发规范模板 (v3.5)
-├── .claude/
-│   └── CLAUDE.md                 # Claude 配置
-├── Architect/
-│   └── README.md                 # 架构模板指引
-├── PRD/
-│   └── README.md                 # 产品需求模板
-├── Design/
-│   └── README.md                 # UI 设计稿模板
-└── Docs/
-    ├── SOP/                      # 标准操作流程
-    │   ├── README.md
-    │   ├── 01-roles.md           # 团队角色与职责
-    │   ├── 02-flow.md            # 开发流程 (v3.5)
-    │   ├── 03-gates.md           # 质量门禁 + 审查
-    │   ├── 04-standards.md       # 测试/Commit/代码规范
-    │   ├── 05-worktree.md        # Git Worktree 规范
-    │   └── 06-operations.md      # 人工操作指南
-    ├── Guides/                   # 团队指南
-    │   ├── superpowers-training.md
-    │   └── team-collaboration.md
-    ├── Records/                  # 模块变更记录
-    │   └── README.md
-    └── superpowers/              # Pipeline 目录
-        ├── specs/README.md       # 设计规格模板
-        ├── plans/README.md       # 实施计划模板
-        └── reviews/README.md     # 审查报告模板
+├── sop-template/                  # SOP 模板目录 (独立)
+│   ├── CLAUDE.md                  # 开发规范模板 (v3.5)
+│   ├── .claude/
+│   │   └── CLAUDE.md              # Claude 配置
+│   ├── Architect/
+│   │   └── README.md              # 架构模板指引
+│   ├── PRD/
+│   │   └── README.md              # 产品需求模板
+│   ├── Design/
+│   │   └── README.md              # UI 设计稿模板
+│   └── Docs/
+│       ├── SOP/                   # 标准操作流程
+│       │   ├── README.md
+│       │   ├── 01-roles.md        # 团队角色与职责
+│       │   ├── 02-flow.md         # 开发流程 (v3.5)
+│       │   ├── 03-gates.md        # 质量门禁 + 审查
+│       │   ├── 04-standards.md    # 测试/Commit/代码规范
+│       │   ├── 05-worktree.md     # Git Worktree 规范
+│       │   └── 06-operations.md   # 人工操作指南
+│       ├── Guides/                # 团队指南
+│       │   ├── superpowers-training.md
+│       │   └── team-collaboration.md
+│       ├── Records/               # 模块变更记录
+│       │   └── README.md
+│       └── superpowers/           # Pipeline 目录
+│           ├── specs/README.md    # 设计规格模板
+│           ├── plans/README.md    # 实施计划模板
+│           └── reviews/README.md  # 审查报告模板
+│
+└── [应用源码目录]/                 # 项目实际源码 (上一级)
+    ├── src/
+    ├── ios/                       # iOS 原生代码
+    ├── android/                   # Android 原生代码
+    └── ...
 ```
 
 ### 复制后操作
 
 1. **检查已复制的文件是否正确**
 
-2. **根据项目现有代码风格调整规范 (Phase 0 规范探索)**
-   - 分析现有目录结构
+2. **在 sop-template/ 目录下运行 Claude Code**
+   ```bash
+   cd sop-template
+   claude
+   ```
+
+3. **根据项目现有代码风格调整规范 (Phase 0 规范探索)**
+   - 分析上一级目录的应用源码结构
    - 提取命名约定
    - 提取设计模式
    - 提取平台约定
    - 全员确认签字 (HARD-GATE 0')
 
-3. **在 Architect/ 目录创建架构设计文档**
+4. **在 Architect/ 目录创建架构设计文档**
    - `ArchitectureDesign.md`
    - `APIDesign.md` (如需要)
 
-4. **运行 `/superpowers` 开始新功能开发**
+5. **运行 `/superpowers` 开始新功能开发**
 
 ---
 
