@@ -51,7 +51,7 @@ Superpowers 将强制执行三阶段硬门禁流程：**Design → Planning → 
 |------|------|
 | SOP 总览 | `Docs/SOP/README.md` |
 | 团队角色 | `Docs/SOP/01-roles.md` |
-| 开发流程 (v3.1) | `Docs/SOP/02-flow.md` |
+| 开发流程 (v3.3) | `Docs/SOP/02-flow.md` |
 | 质量门禁 + 审查 | `Docs/SOP/03-gates.md` |
 | 测试 + Commit 规范 | `Docs/SOP/04-standards.md` |
 | Git Worktree 规范 | `Docs/SOP/05-worktree.md` |
