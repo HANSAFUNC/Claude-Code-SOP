@@ -9,7 +9,7 @@
 | 文件 | 说明 | 版本 |
 |------|------|------|
 | [01-roles.md](./01-roles.md) | 团队角色与职责 | v1.0 |
-| [02-flow.md](./02-flow.md) | 开发流程详解 (三阶段硬门禁) | **v2.0** |
+| [02-flow.md](./02-flow.md) | 开发流程详解 (三阶段硬门禁 + Superpowers 命令) | **v2.1** |
 | [03-review.md](./03-review.md) | 代码审查流程 | v1.0 |
 | [04-testing.md](./04-testing.md) | 测试标准与规范 | v1.0 |
 | [05-commit.md](./05-commit.md) | Commit 规范 | v1.0 |
