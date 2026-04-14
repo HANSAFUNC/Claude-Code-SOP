@@ -186,6 +186,39 @@ echo -e "复制文件: ${BLUE}$COPIED_FILES${NC} 个 .md 文件"
 echo -e "创建目录: ${BLUE}$COPIED_DIRS${NC} 个新目录"
 echo ""
 
+# 添加源码检索路径到 CLAUDE.md
+echo -e "${CYAN}[配置源码检索路径]${NC}"
+SOURCE_PATH_CONFIG='
+## 📁 应用源码路径
+
+> **应用源码位于上一级目录，Claude 在分析代码时请使用以下路径：**
+
+| 路径 | 说明 |
+|------|------|
+| `../` | 应用根目录 |
+| `../src/` | 主要源码目录 |
+| `../ios/` | iOS 原生代码 (如存在) |
+| `../android/` | Android 原生代码 (如存在) |
+| `../app/` | 应用模块 (如存在) |
+
+'
+
+# 在 CLAUDE.md 开头插入源码路径配置 (在标题部分之后)
+if [ -f "$TEMPLATE_DIR/CLAUDE.md" ]; then
+    # 读取原文件内容，跳过开头的标题和分隔线 (前5行: 标题、空行、描述、空行、分隔线)
+    HEAD_CONTENT=$(head -n 5 "$TEMPLATE_DIR/CLAUDE.md")
+    BODY_CONTENT=$(tail -n +6 "$TEMPLATE_DIR/CLAUDE.md")
+
+    # 写入新文件: 标题部分 + 源码配置 + 原文件剩余内容
+    {
+        echo "$HEAD_CONTENT"
+        echo "$SOURCE_PATH_CONFIG"
+        echo "$BODY_CONTENT"
+    } > "$TEMPLATE_DIR/CLAUDE.md"
+
+    echo -e "${GREEN}  ✓ 已添加源码检索路径配置到 CLAUDE.md${NC}"
+fi
+
 # 显示目标目录结构
 echo -e "${YELLOW}目标项目结构:${NC}"
 echo ""
