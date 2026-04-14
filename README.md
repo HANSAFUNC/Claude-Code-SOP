@@ -1,10 +1,14 @@
-# 项目开发指南
+# SOP 开发规范模板
 
-> 基于 Claude Code + Superpowers 插件的通用项目开发指南
+> 基于 Superpowers Pipeline v6.1 的通用开发规范模板
+> **可一键复制到任何项目，实现标准化开发流程**
+
+---
 
 ## 📋 目录
 
 - [快速开始](#快速开始)
+- [一键复制到新项目](#一键复制到新项目)
 - [项目结构](#项目结构)
 - [开发流程](#开发流程)
 - [常用命令](#常用命令)
@@ -18,8 +22,8 @@
 
 | 工具 | 用途 |
 |------|------|
-| Node.js 16+ | 运行环境 |
 | Claude Code | AI 辅助开发 |
+| Superpowers 插件 | 三阶段硬门禁流程 |
 
 ### 环境配置
 
@@ -30,6 +34,89 @@ npm install -g @anthropics/claude-code
 # 配置 API Key
 export ANTHROPIC_API_KEY=your_api_key
 ```
+
+---
+
+## 📦 一键复制到新项目
+
+### 使用方法
+
+```bash
+# 从本项目复制 SOP 模板到目标项目
+./scripts/copy-sop-template.sh <目标项目路径>
+
+# 示例
+./scripts/copy-sop-template.sh ~/projects/my-app
+./scripts/copysop-template.sh /path/to/another-project
+```
+
+### 复制内容
+
+脚本会复制以下文件和目录：
+
+| 目录 | 文件数 | 内容 |
+|------|--------|------|
+| `CLAUDE.md` | 1 | 开发规范模板 (v3.5) |
+| `.claude/CLAUDE.md` | 1 | Claude 配置 |
+| `Architect/` | 1 | 架构模板指引 |
+| `PRD/` | 1 | 产品需求模板 |
+| `Design/` | 1 | UI 设计稿模板 |
+| `Docs/SOP/` | 7 | 标准操作流程 |
+| `Docs/Guides/` | 2 | 培训文档 + 团队协作 |
+| `Docs/Records/` | 1 | 模块变更记录模板 |
+| `Docs/superpowers/` | 3 | specs/plans/reviews 模板 |
+
+**总计：18 个 .md 文件**
+
+### 复制后的目录结构
+
+```
+<目标项目>/
+├── CLAUDE.md                     # 开发规范模板 (v3.5)
+├── .claude/
+│   └── CLAUDE.md                 # Claude 配置
+├── Architect/
+│   └── README.md                 # 架构模板指引
+├── PRD/
+│   └── README.md                 # 产品需求模板
+├── Design/
+│   └── README.md                 # UI 设计稿模板
+└── Docs/
+    ├── SOP/                      # 标准操作流程
+    │   ├── README.md
+    │   ├── 01-roles.md           # 团队角色与职责
+    │   ├── 02-flow.md            # 开发流程 (v3.5)
+    │   ├── 03-gates.md           # 质量门禁 + 审查
+    │   ├── 04-standards.md       # 测试/Commit/代码规范
+    │   ├── 05-worktree.md        # Git Worktree 规范
+    │   └── 06-operations.md      # 人工操作指南
+    ├── Guides/                   # 团队指南
+    │   ├── superpowers-training.md
+    │   └── team-collaboration.md
+    ├── Records/                  # 模块变更记录
+    │   └── README.md
+    └── superpowers/              # Pipeline 目录
+        ├── specs/README.md       # 设计规格模板
+        ├── plans/README.md       # 实施计划模板
+        └── reviews/README.md     # 审查报告模板
+```
+
+### 复制后操作
+
+1. **检查已复制的文件是否正确**
+
+2. **根据项目现有代码风格调整规范 (Phase 0 规范探索)**
+   - 分析现有目录结构
+   - 提取命名约定
+   - 提取设计模式
+   - 提取平台约定
+   - 全员确认签字 (HARD-GATE 0')
+
+3. **在 Architect/ 目录创建架构设计文档**
+   - `ArchitectureDesign.md`
+   - `APIDesign.md` (如需要)
+
+4. **运行 `/superpowers` 开始新功能开发**
 
 ---
 
@@ -46,12 +133,18 @@ export ANTHROPIC_API_KEY=your_api_key
 ├── Architect/                  # 架构设计文档
 ├── Design/                     # UI 设计稿
 ├── Docs/                       # 团队规范文档
-│   ├── SOP/                    # 标准操作流程
+│   ├── SOP/                    # 标准操作流程 (6 文档)
 │   ├── Guides/                 # 协作指南
 │   ├── Records/                # 模块变更记录
-│   └── Tests/                  # 测试计划
+│   ├── Tests/                  # 测试计划
+│   └── superpowers/            # Pipeline 目录
+│       ├── specs/              # 设计规格
+│       ├── plans/              # 实施计划
+│       └── reviews/            # 审查报告
 ├── PRD/                        # 产品需求文档
-├── CLAUDE.md                   # 核心指令
+├── scripts/                    # 工具脚本
+│   └── copy-sop-template.sh    # 一键复制脚本
+├── CLAUDE.md                   # 核心指令 (v3.5)
 └── README.md                   # 本文件
 ```
 
@@ -59,41 +152,76 @@ export ANTHROPIC_API_KEY=your_api_key
 
 ## 🔄 开发流程
 
-### 新功能开发流程
+### 三阶段硬门禁流程
 
 ```
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  需求输入   │ -> │  架构设计   │ -> │  并行开发   │ -> │  测试验证   │
-│ PRD + Design│    │  Gate 1    │    │ Code+Test  │    │  Gate 2    │
-└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
-                                                                   │
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐              │
-│  模块记录   │ <- │  代码审查   │ <- │  合并发布   │              │
-│  Gate 4    │    │  Gate 3    │    │  Release   │              │
-└─────────────┘    └─────────────┘    └─────────────┘              │
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    Superpowers 三阶段硬门禁开发流程                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  Phase 1: Design      HARD-GATE 1      Phase 2: Planning                   │
+│  /superpowers     ─────────────────→   /writing-plans                      │
+│       ↓            "禁止未批准实施"          实施计划文档                     │
+│  设计规格文档                              ↓                               │
+│                                        HARD-GATE 2                         │
+│                                    "计划必须可构建"                          │
+│                                             ↓                               │
+│  Phase 3: Implement  ─────────────→   HARD-GATE 3                          │
+│  /tdd /debug /verify     ↓             "规格合规 + 代码质量"                 │
+│       ↓             Git Worktree                                            │
+│  双阶段审查           隔离机制                                               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 使用 Claude Code
+### 场景选择决策树
 
-1. **启动 Superpowers 流程**
-   ```bash
-   /superpowers
-   ```
+```
+是否是新功能? ──── 是 → 完整三阶段流程 (Phase 1-3)
+    │
+    否
+    │
+是否是 Bug? ──── 是 → Bug 修复流程 (/debug + /verify)
+    │
+    否
+    │
+改动范围 >10%? ──── 是 → 改版流程 (Phase 1-3 简化版)
+    │
+    否
+    │
+小改动流程 (直接执行)
+```
 
-2. **创建团队**（开发新功能前）
-   ```bash
-   TeamCreate({
-     team_name: "module-name-team",
-     description: "模块开发团队"
-   })
-   ```
+### 旧项目接入流程 (Phase 0)
 
-3. **按流程执行**
-   - 需求分析 → 架构设计 → 测试先行 → 代码实现 → 审查验证
+```
+Phase 0: 规范探索      HARD-GATE 0'     后续开发
+    │                      ↓                  │
+    ↓                 人工确认签字             ↓
+分析现有代码  ─────────────────→   按确认规范继续
+提取约定
+定义兼容规范
+    │
+    ↓
+产出规范文档
+```
 
 ---
 
 ## 🛠️ 常用命令
+
+### 启动开发流程
+
+```bash
+# 新功能开发
+/superpowers
+
+# Bug 修复
+/debug
+
+# 验证功能
+/verify
+```
 
 ### Git 操作
 
@@ -115,45 +243,72 @@ git push origin main
 
 | Type | 说明 | 示例 |
 |------|------|------|
-| `feat` | 新功能 | `feat(user): 添加用户管理` |
-| `fix` | Bug 修复 | `fix(auth): 修复认证问题` |
-| `refactor` | 重构 | `refactor(utils): 抽取工具函数` |
-| `docs` | 文档更新 | `docs(README): 更新说明` |
-| `test` | 测试 | `test(user): 添加单元测试` |
-| `chore` | 构建/依赖 | `chore(deps): 升级依赖` |
+| `feat` | 新功能 | `feat: 添加用户管理` |
+| `fix` | Bug 修复 | `fix: 修复认证问题` |
+| `refactor` | 重构 | `refactor: 抽取工具函数` |
+| `docs` | 文档更新 | `docs: 更新说明` |
+| `test` | 测试 | `test: 添加单元测试` |
+| `chore` | 构建/依赖 | `chore: 升级依赖` |
 
 ---
 
 ## 📚 文档索引
 
 ### 产品文档
+
 | 文档 | 路径 |
 |------|------|
 | PRD 目录 | `PRD/README.md` |
 | 设计稿 | `Design/README.md` |
 
 ### 架构文档
-| 文档 | 路径 |
-|------|------|
-| 架构设计 | `Architect/ArchitectureDesign.md` |
-| 数据模型 | `Architect/DataModels.md` |
-| API 设计 | `Architect/APIDesign.md` |
 
-### 团队规范
 | 文档 | 路径 |
 |------|------|
-| SOP 总览 | `Docs/SOP/README.md` |
-| 团队角色 | `Docs/SOP/01-roles.md` |
-| 开发流程 | `Docs/SOP/02-flow.md` |
-| 代码审查 | `Docs/SOP/03-review.md` |
-| 测试要求 | `Docs/SOP/04-testing.md` |
-| Commit 规范 | `Docs/SOP/05-commit.md` |
-| 质量门禁 | `Docs/SOP/06-gates.md` |
+| 架构模板指引 | `Architect/README.md` |
 
-### 模块记录
-| 文档 | 路径 |
-|------|------|
-| 记录索引 | `Docs/Records/README.md` |
+### 团队规范 (SOP)
+
+| 文档 | 路径 | 说明 |
+|------|------|------|
+| SOP 总览 | `Docs/SOP/README.md` | 流程总览 |
+| 团队角色 | `Docs/SOP/01-roles.md` | 角色职责定义 |
+| 开发流程 | `Docs/SOP/02-flow.md` | 三阶段流程 (v3.5) |
+| 质量门禁 | `Docs/SOP/03-gates.md` | HARD-GATE 定义 |
+| 开发规范 | `Docs/SOP/04-standards.md` | 测试/Commit/代码 |
+| Worktree | `Docs/SOP/05-worktree.md` | Git 隔离环境 |
+| 操作指南 | `Docs/SOP/06-operations.md` | 人工操作步骤 |
+
+### Superpowers Pipeline
+
+| 文档 | 路径 | 说明 |
+|------|------|------|
+| 设计规格模板 | `Docs/superpowers/specs/README.md` | Phase 1 产出 |
+| 实施计划模板 | `Docs/superpowers/plans/README.md` | Phase 2 产出 |
+| 审查报告模板 | `Docs/superpowers/reviews/README.md` | Phase 3 产出 |
+
+---
+
+## ⚠️ 硬门禁定义
+
+| 门禁 | 阻塞条件 | 说明 |
+|------|----------|------|
+| **HARD-GATE 0'** | 规范必须人工确认 | 旧项目接入时，提取的规范需全员签字 |
+| **HARD-GATE 1** | 禁止未批准实施 | 设计未通过 = 禁止进入 Planning |
+| **HARD-GATE 2** | 计划必须可构建 | 计划未通过 = 禁止进入 Implementation |
+| **HARD-GATE 3** | 规格合规 + 代码质量 | 审查未通过 = 禁止合并 |
+
+---
+
+## 🔴 No Placeholders 规则
+
+**禁止以下内容 (必须重新规划):**
+
+| 问题类型 | 示例 | 说明 |
+|----------|------|------|
+| TBD/模糊 | "TBD: 待确认" | 必须明确定义 |
+| 未定义引用 | "类似 Task N" | 必须完整描述 |
+| 占位符 | "// ... existing code ..." | 必须写出具体代码 |
 
 ---
 
@@ -162,35 +317,9 @@ git push origin main
 | 角色 | 职责 |
 |------|------|
 | **PM** | 需求定义、PRD 编写 |
-| **Architect** | 架构设计、技术评审 |
-| **开发** | 代码实现 |
+| **Architect** | 架构设计、技术评审、代码审查 |
+| **Platform Specialist** | 平台特定代码实现、单元测试 |
 | **QA** | 测试验证、覆盖率检查 |
-| **Code Reviewer** | 代码审查、安全扫描 |
-
----
-
-## ✅ 质量门禁
-
-### Gate 1: 架构评审
-- [ ] 架构文档完整
-- [ ] 数据模型定义清晰
-- [ ] API 接口设计合理
-- [ ] 全员评审通过
-
-### Gate 2: 测试验证
-- [ ] 所有测试用例通过
-- [ ] 测试覆盖率 ≥ 80%
-- [ ] 无阻塞性 Bug
-
-### Gate 3: 代码审查
-- [ ] 代码符合规范
-- [ ] 无安全漏洞
-- [ ] 审查问题全部解决
-
-### Gate 4: 模块记录
-- [ ] 模块概述已创建
-- [ ] 变更历史已登记
-- [ ] 索引已更新
 
 ---
 
@@ -198,8 +327,10 @@ git push origin main
 
 - [Claude Code 官方文档](https://docs.anthropic.com/claude-code)
 - [Conventional Commits](https://www.conventionalcommits.org/)
+- [Superpowers 插件](https://github.com/anthropics/superpowers)
 
 ---
 
-**版本**: 1.0  
-**更新日期**: 2026-04-07
+**版本**: 2.0  
+**更新日期**: 2026-04-14  
+**来源**: Superpowers Pipeline v6.1
