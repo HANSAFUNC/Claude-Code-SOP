@@ -92,8 +92,9 @@ copy_file() {
         COPIED_DIRS=$((COPIED_DIRS + 1))
     fi
 
-    # 复制文件
+    # 如果目标文件已存在，先删除
     if [ -f "$DST" ]; then
+        rm -f "$DST"
         echo -e "${YELLOW}  ⚠ 覆盖: $DESC${NC}"
     else
         echo -e "${GREEN}  ✓ 新建: $DESC${NC}"
@@ -102,7 +103,7 @@ copy_file() {
     COPIED_FILES=$((COPIED_FILES + 1))
 }
 
-# 复制目录的函数 (只复制 .md 文件，排除 .DS_Store)
+# 复制目录的函数 (先删除目标目录，再复制所有 .md 文件)
 copy_dir() {
     local SRC_DIR="$1"
     local DST_DIR="$2"
@@ -113,16 +114,23 @@ copy_dir() {
         return 1
     fi
 
-    # 创建目标目录
-    if [ ! -d "$DST_DIR" ]; then
-        mkdir -p "$DST_DIR"
-        COPIED_DIRS=$((COPIED_DIRS + 1))
-    fi
-
     # 统计该目录下的 .md 文件数
     local MD_COUNT=$(find "$SRC_DIR" -name "*.md" -type f | wc -l | tr -d ' ')
 
-    echo -e "${GREEN}  ✓ 复制目录: $DESC ($MD_COUNT 个 .md 文件)${NC}"
+    # 如果目标目录已存在，先删除所有 .md 文件
+    if [ -d "$DST_DIR" ]; then
+        find "$DST_DIR" -name "*.md" -type f -delete 2>/dev/null || true
+        # 删除空目录
+        find "$DST_DIR" -type d -empty -delete 2>/dev/null || true
+        echo -e "${YELLOW}  ⚠ 覆盖: $DESC ($MD_COUNT 个 .md 文件)${NC}"
+    else
+        mkdir -p "$DST_DIR"
+        COPIED_DIRS=$((COPIED_DIRS + 1))
+        echo -e "${GREEN}  ✓ 新建: $DESC ($MD_COUNT 个 .md 文件)${NC}"
+    fi
+
+    # 确保目标目录存在
+    mkdir -p "$DST_DIR"
 
     # 复制所有 .md 文件，保持目录结构
     find "$SRC_DIR" -name "*.md" -type f | while read MD_FILE; do
