@@ -9,7 +9,7 @@
 | 文件 | 说明 | 版本 |
 |------|------|------|
 | [01-roles.md](./01-roles.md) | 团队角色与职责 | v1.0 |
-| [02-flow.md](./02-flow.md) | 开发流程 (含旧项目接入规范) | **v3.4** |
+| [02-flow.md](./02-flow.md) | 开发流程 (含旧项目规范人工确认) | **v3.5** |
 | [03-gates.md](./03-gates.md) | 质量门禁 + 审查流程 | **v3.0** |
 | [04-standards.md](./04-standards.md) | 测试标准 + Commit 规范 + 代码规范 | **v3.0** |
 | [05-worktree.md](./05-worktree.md) | Git Worktree 使用规范 | v1.0 |
