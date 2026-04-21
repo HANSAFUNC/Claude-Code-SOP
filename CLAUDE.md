@@ -242,8 +242,9 @@ Phase 0: 规范探索      HARD-GATE 0'     后续开发
 ```text
 项目根目录/
 ├── .claude/                    # Claude 配置
-│   ├── agents/                 # 项目专用 agents (可选)
-│   ├── rules/                  # 项目规则 (可选)
+│   ├── agents/                 # 项目专用 agents
+│   ├── rules/                  # 项目规则
+│   ├── skills/                 # 技能配置
 │   ├── teams/                  # 团队配置 (可选)
 │   └── CLAUDE.md               # 本文件
 ├── docs/                       # 文档目录

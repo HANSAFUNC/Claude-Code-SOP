@@ -57,7 +57,10 @@ export ANTHROPIC_API_KEY=your_api_key
 | 目录 | 文件数 | 内容 |
 |------|--------|------|
 | `CLAUDE.md` | 1 | 开发规范模板 (v3.5) |
-| `.claude/CLAUDE.md` | 1 | Claude 配置 |
+| `.claude/CLAUDE.md` | 1 | Claude 核心配置 |
+| `.claude/agents/` | - | 代理配置文件 |
+| `.claude/rules/` | - | 项目规则定义 |
+| `.claude/skills/` | - | 技能配置 |
 | `Architect/` | 1 | 架构模板指引 |
 | `PRD/` | 1 | 产品需求模板 |
 | `Design/` | 1 | UI 设计稿模板 |
@@ -66,7 +69,7 @@ export ANTHROPIC_API_KEY=your_api_key
 | `Docs/Records/` | 1 | 模块变更记录模板 |
 | `Docs/superpowers/` | 3 | specs/plans/reviews 模板 |
 
-**总计：18 个 .md 文件**
+**总计：18+ 个 .md 文件（包含 agents/rules/skills 下的所有配置）**
 
 ### 复制后的目录结构
 
@@ -77,7 +80,10 @@ export ANTHROPIC_API_KEY=your_api_key
 ├── sop-template/                  # SOP 模板目录 (独立)
 │   ├── CLAUDE.md                  # 开发规范模板 (v3.5)
 │   ├── .claude/
-│   │   └── CLAUDE.md              # Claude 配置
+│   │   ├── CLAUDE.md              # Claude 核心配置
+│   │   ├── agents/                # 代理配置文件
+│   │   ├── rules/                 # 项目规则定义
+│   │   └── skills/                # 技能配置
 │   ├── Architect/
 │   │   └── README.md              # 架构模板指引
 │   ├── PRD/
@@ -142,6 +148,7 @@ export ANTHROPIC_API_KEY=your_api_key
 ├── .claude/                    # Claude Code 配置
 │   ├── agents/                 # Agent 角色定义
 │   ├── rules/                  # 项目规则
+│   ├── skills/                 # 技能配置
 │   ├── settings.json           # 设置
 │   ├── teams/                  # 团队配置
 │   └── CLAUDE.md               # 项目指令
